@@ -69,4 +69,7 @@ Add additional notes about how to deploy this on a live system.
 
 
 # Acknowledgments
+
 This project has been supported by UCI MECPS program and advised by professor [@Rainer Dömer](http://www.cecs.uci.edu/~doemer/).
+
+[![UCI MECPS](https://raw.githubusercontent.com/Fantastic8/reconstruction-jetsonnano-realsense/master/media/MECPSLOGO-01-300x85.png)](https://mecps.uci.edu/)
