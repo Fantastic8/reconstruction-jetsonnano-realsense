@@ -1,6 +1,7 @@
 # reconstruction-jetsonnano-realsense
 This project is doing 3D reconstruction using Jetson nano and Intel realsense to capture images and reconstruct a mesh model on Google Cloud using openMVG and openMVS algorithm
 
+![Design Flow](https://raw.githubusercontent.com/Fantastic8/reconstruction-jetsonnano-realsense/master/media/DesignFlow.png)
 # Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live syste.

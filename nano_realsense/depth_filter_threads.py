@@ -1,3 +1,8 @@
+'''
+@author PinkBeast
+@create May 30, 2019
+'''
+
 import pyrealsense2 as rs
 import numpy as np
 import scipy.misc

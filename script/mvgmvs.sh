@@ -1,5 +1,8 @@
 #!/bin/sh
 
+#@author PinkBeast
+#@create May 26, 2019
+
 # To run this script you MUST have the followings under same directory:
 # Folder: images (containing images of object you want to reconstruct)
 
