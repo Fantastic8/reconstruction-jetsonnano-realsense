@@ -58,27 +58,9 @@ Add additional notes about how to deploy this on a live system.
 + SSH - Back end Framework
 + BootStrap - Front end Framework
 
+#Author
 
-#Contributing
-
-Please read [CONTRIBUTING.md](#) for details on our code of conduct, and the process for submitting pull requests to us.
-
-#Versioning
-
-We use [SemVer](#) for versioning. For the versions available, see the [tags on this repository](#).
-
-#Authors
-
-+ Mark Zhang - Initial work
-
-See also the list of [contributors](#) who participated in this project.
-
-
-#License
-
-This project is licensed under the MIT License - see the [LICENSE.md](#) file for details.
+[@Mark Zhang](https://github.com/Fantastic8)
 
 #Acknowledgments
-+ Hat tip to anyone who's code was used
-+ Inspiration
-+ etc
+This project has been supported by UCI MECPS program and advised by professor [@Rainer Dömer](http://www.cecs.uci.edu/~doemer/).

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#@author PinkBeast
+#@author Mark Zhang
 #@create May 26, 2019
 
 # To run this script you MUST have the followings under same directory:
