@@ -9,6 +9,12 @@ This project is doing 3D reconstruction using Jetson nano and Intel realsense to
 This project used openMVG and openMVS algorithm to construct a 3D mesh model of an object. To make algorithm faster and produce more accurate mesh model, RGB-Depth stereo camera was used to remove background of an image, and CUDA was used to speed up the process of processing images.
 
 
+## Design Flow
+
+Below is the design flow of this project. Or you can see the poster to better understand this project [here](https://github.com/Fantastic8/reconstruction-jetsonnano-realsense/blob/master/media/poster.jpg).
+
+![Design Flow](https://raw.githubusercontent.com/Fantastic8/reconstruction-jetsonnano-realsense/master/media/DesignFlow.png)
+
 ## Prerequisites
 
 + [Intel Realsense D435i](https://www.intelrealsense.com/depth-camera-d435i/)
@@ -53,57 +59,180 @@ Next, build python3 [wrapper](https://github.com/IntelRealSense/librealsense/tre
 
 Unfortunately, after building librealsense SDK on Jetson Nano, the camera is unrecognizable for Jetson Nano. That's because the librealsense SDK doesn't support the current kernel of Jetson Nano. Here's the [turotial](https://github.com/IntelRealSense/librealsense/issues/3759#issuecomment-485263506) for rebuilding kernel of Jetson Nano.
 
-This time, the camera can finally work nicely on board.
+At this time, the camera can finally work nicely on board.
 
 
 ### Server
 
+#### openMVG
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live syste.
+Follow the [instruction](https://github.com/openMVG/openMVG) to install openMVG on Server.
+
+#### openMVS
+
+Follow the [instruction](https://github.com/cdcseacave/openMVS) to install openMVS on Server.
 
 
-# Installing
+## Usage
 
-A step by step series of examples that tell you have to get a development environment running.
+### Jetson Nano
 
-Say what the step will be
+Download repository on your Jetson Nano.
 
 ```
-Give the example
+git clone https://github.com/Fantastic8/reconstruction-jetsonnano-realsense.git
 ```
 
-And repeat
+Enter "nano_realsense" folder.
 
 ```
-until finished
+cd reconstruction-jetsonnano-realsense/nano_realsense
 ```
 
-End with an example of getting some data out of the system or using it for a little demo.
+Run python script, this script will create an "output" folder, and another folder inside the "output" folder named with time you run the script to store images. After running the script, you will get RGB image and Mask image sequence.
 
-# Running the tests
+```
+python3 depth_filter.py
+```
 
-Explain how to run the automated tests for this system.
+### Server
+
+Transfer RGB and Mask images to server.
+
+Download repository on server.
+
+```
+git clone https://github.com/Fantastic8/reconstruction-jetsonnano-realsense.git
+```
+
+Enter "script" folder.
+
+```
+cd reconstruction-jetsonnano-realsense/script
+```
+
+Run script,
+
+```
+sudo bash mvgmvs.sh 1536 
+```
+
+For "mvgmvs.sh" script, it takes 6 parameters. See [documentation](https://openmvg.readthedocs.io/en/latest/software/SfM/SfMInit_ImageListing/) for more information.
+
+```
+1. focal
+	[-f|–focal] (value in pixels)
+2. describerMethod
+	[-m|–describerMethod]
+		Used method to describe an image:
+			SIFT: (default),
+			AKAZE_FLOAT: AKAZE with floating point descriptors,
+			AKAZE_MLDB: AKAZE with binary descriptors.
+3. describerPreset
+	[-p|–describerPreset]
+		Used to control the Image_describer configuration:
+			NORMAL,
+			HIGH,
+			ULTRA: !!Can be time consuming!!
+4. ratio
+	[-r|-ratio]
+		(Nearest Neighbor distance ratio, default value is set to 0.8).
+			Using 0.6 is more restrictive => provides less false positive.
+5. geometric_model
+	[-g|-geometric_model]
+		type of model used for robust estimation from the photometric putative matches
+			f: Fundamental matrix filtering
+			e: Essential matrix filtering
+			h: Homography matrix filtering
+
+6. nearest_matching_method
+	[-n|–nearest_matching_method]
+			AUTO: auto choice from regions type,
+		For Scalar based descriptor you can use:
+			BRUTEFORCEL2: BruteForce L2 matching for Scalar based regions descriptor,
+			ANNL2: Approximate Nearest Neighbor L2 matching for Scalar based regions descriptor,
+			CASCADEHASHINGL2: L2 Cascade Hashing matching,
+			FASTCASCADEHASHINGL2: (default).
+				L2 Cascade Hashing with precomputed hashed regions, (faster than CASCADEHASHINGL2 but use more memory).
+		For Binary based descriptor you must use:
+			BRUTEFORCEHAMMING: BruteForce Hamming matching for binary based regions descriptor,
+```
+
+It's ok that you don't know which parameter you want to use. You can simply run script "mvgmvsMulti.sh" to "Brute Force" all parameter combinations.
+
+All you have to do is to add parameters you want to test in the array, and it will automatically go over all the combinations.
+
+```
+# ------ Image Listing parameter ------
+# [-f|–focal] (value in pixels)
+focal_value="1536"
+
+# ------ Compute Features parameter ------
+# [-m|–describerMethod]
+# 	Used method to describe an image:
+#		SIFT: (default),
+#		AKAZE_FLOAT: AKAZE with floating point descriptors,
+#		AKAZE_MLDB: AKAZE with binary descriptors.
+describerMethods=("SIFT" "AKAZE_FLOAT")
+
+# [-p|–describerPreset]
+#	Used to control the Image_describer configuration:
+#		NORMAL,
+#		HIGH,
+#		ULTRA: !!Can be time consuming!!
+describerPresets=("ULTRA")
+
+# ------ Main Compute Matches ------
+# [-r|-ratio]
+#	(Nearest Neighbor distance ratio, default value is set to 0.8).
+#		Using 0.6 is more restrictive => provides less false positive.
+ratios=("0.6" "0.8")
+
+# [-g|-geometric_model]
+#	type of model used for robust estimation from the photometric putative matches
+#		f: Fundamental matrix filtering
+#		e: Essential matrix filtering
+#		h: Homography matrix filtering
+geometric_models=("f" "e" "h")
+
+# [-n|–nearest_matching_method]
+#	AUTO: auto choice from regions type,
+#	For Scalar based descriptor you can use:
+#		BRUTEFORCEL2: BruteForce L2 matching for Scalar based regions descriptor,
+#		ANNL2: Approximate Nearest Neighbor L2 matching for Scalar based regions descriptor,
+#		CASCADEHASHINGL2: L2 Cascade Hashing matching,
+#		FASTCASCADEHASHINGL2: (default).
+#			L2 Cascade Hashing with precomputed hashed regions, (faster than CASCADEHASHINGL2 but use more memory).
+#	For Binary based descriptor you must use:
+#		BRUTEFORCEHAMMING: BruteForce Hamming matching for binary based regions descriptor,
+nearest_matching_methods=("BRUTEFORCEL2" "ANNL2" "CASCADEHASHINGL2" "FASTCASCADEHASHINGL2")
+```
+
+```
+sudo bash mvgmvsMulti.sh
+```
+
+Screen tool is recommended to run this script since it's very time consuming.
+
+After process completed. You can see all the outputs are in the "output" folder named with parameters it used.
+
+
+## Results
 
 
 
-# Deployment
-
-Add additional notes about how to deploy this on a live system.
-
-
-# Built With
+## Built With
 
 + SSH - Back end Framework
 + BootStrap - Front end Framework
 
-![Design Flow](https://raw.githubusercontent.com/Fantastic8/reconstruction-jetsonnano-realsense/master/media/DesignFlow.png)
 
-# Author
+## Author
 
 [@Mark Zhang](https://github.com/Fantastic8)
 
 
-# Acknowledgments
+## Acknowledgments
 
 This project has been supported by UCI MECPS program and advised by professor [@Rainer Dömer](http://www.cecs.uci.edu/~doemer/).
 

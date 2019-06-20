@@ -201,10 +201,10 @@ try:
         clipped_filtered_np = createMask(filtered_depth_np, CLIPPING_DISTANCE)
         saveImage(clipped_filtered_np, 'IMAGE_', sequence, True)
 
-        replace_color = 0
-        filtered_depth_image_3d = np.dstack((filtered_depth_np, filtered_depth_np, filtered_depth_np))
-        clipped_filtered_color_np = np.where((filtered_depth_image_3d > (CLIPPING_DISTANCE / depth_scale)) | (filtered_depth_image_3d <= 0), replace_color, color_np)
-        saveImage(clipped_filtered_color_np, 'VIEW_', sequence)
+        #replace_color = 0
+        #filtered_depth_image_3d = np.dstack((filtered_depth_np, filtered_depth_np, filtered_depth_np))
+        #clipped_filtered_color_np = np.where((filtered_depth_image_3d > (CLIPPING_DISTANCE / depth_scale)) | (filtered_depth_image_3d <= 0), replace_color, color_np)
+        #saveImage(clipped_filtered_color_np, 'VIEW_', sequence)
 
         # white light on
         GPIO.output(PIN_WHITE_LIGHT, GPIO.LOW)
