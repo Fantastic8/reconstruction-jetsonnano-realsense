@@ -12,11 +12,6 @@ These instructions will get you a copy of the project up and running on your loc
 # Prerequisites
 
 What things you need to install the software and how to install them.
-@misc{openMVG,
-    author = "Pierre Moulon and Pascal Monasse and Renaud Marlet and Others",
-     title = "OpenMVG. An Open Multiple View Geometry library.",
-    howpublished = "\url{https://github.com/openMVG/openMVG}",
-  }
 
 
 # Installing
