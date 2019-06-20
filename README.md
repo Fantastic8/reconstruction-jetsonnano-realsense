@@ -219,6 +219,37 @@ After process completed. You can see all the outputs are in the "output" folder 
 
 ## Results
 
+I used anteater in UCI as object to reconstruct. And belows are what I got!
+
+### Sparse point cloud model (openMVG)
+
+![sparse point cloud](https://raw.githubusercontent.com/Fantastic8/reconstruction-jetsonnano-realsense/master/media/point%20cloud.png)
+
+### Dense point cloud model (openMVS)
+
+![dense point cloud](https://raw.githubusercontent.com/Fantastic8/reconstruction-jetsonnano-realsense/master/media/dense%20cloud.png)
+
+### Mesh model (openMVS)
+
+![mesh model](https://raw.githubusercontent.com/Fantastic8/reconstruction-jetsonnano-realsense/master/media/mesh.png)
+
+### Refined Mesh model (openMVS)
+
+![refined mesh model](https://raw.githubusercontent.com/Fantastic8/reconstruction-jetsonnano-realsense/master/media/refine.png)
+
+### Textured Refined Mesh model (openMVS)
+
+![textured refined mesh model](https://raw.githubusercontent.com/Fantastic8/reconstruction-jetsonnano-realsense/master/media/texture.png)
+
+
+### Final model
+
+![final model](https://raw.githubusercontent.com/Fantastic8/reconstruction-jetsonnano-realsense/master/media/modified.png)
+
+### Model build without Mask
+
+![original](https://raw.githubusercontent.com/Fantastic8/reconstruction-jetsonnano-realsense/master/media/original.png)
+
 
 
 ## Built With
