@@ -253,13 +253,6 @@ I used anteater in UCI as object to reconstruct. And belows are what I got!
 As you can see, the real anteater lies in the red box. It's very small and has very low resolution.
 
 
-
-## Built With
-
-+ SSH - Back end Framework
-+ BootStrap - Front end Framework
-
-
 ## Author
 
 [@Mark Zhang](https://github.com/Fantastic8)
