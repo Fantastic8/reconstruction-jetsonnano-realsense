@@ -246,9 +246,11 @@ I used anteater in UCI as object to reconstruct. And belows are what I got!
 
 ![final model](https://raw.githubusercontent.com/Fantastic8/reconstruction-jetsonnano-realsense/master/media/modified.png)
 
-### Model build without Mask
+### Model built without Mask
 
 ![original](https://raw.githubusercontent.com/Fantastic8/reconstruction-jetsonnano-realsense/master/media/original.png)
+
+As you can see, the real anteater lies in the red box. It's very small and has very low resolution.
 
 
 
